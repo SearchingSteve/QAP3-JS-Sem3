@@ -35,7 +35,7 @@ const USERS = [
     username: "RegularUser",
     email: "user@example.com",
     password: bcrypt.hashSync("user123", SALT_ROUNDS),
-    role: "user", 
+    role: "user",
   },
 ];
 
@@ -49,7 +49,7 @@ app.post("/login", (request, response) => {});
 
 // GET /signup - Render signup form
 app.get("/signup", (request, response) => {
-  response.render("signup", { error: null }); 
+  response.render("signup", { error: null });
 });
 
 // POST /signup - Allows a user to signup
@@ -65,13 +65,14 @@ app.post("/signup", async (request, response) => {
   }
 
   // Hash the password
+  hashedPassword = await bcrypt.hash(password, SALT_ROUNDS);
 
   // Add the user to the USERS array
   const newUser = {
     id: USERS.length + 1,
     username,
     email,
-    password,
+    password: hashedPassword,
     role: "user",
   };
   USERS.push(newUser);
