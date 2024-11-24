@@ -45,7 +45,27 @@ app.get("/login", (request, response) => {
 });
 
 // POST /login - Allows a user to login
-app.post("/login", (request, response) => {});
+app.post("/login", (request, response) => {
+  const { username, email, password } = request.body;
+  const user = USERS.find(
+    (user) => user.email === email || user.username === username
+  );
+  const passwordMatch = bcrypt.compareSync(password, user.password);
+  if (!user || !passwordMatch) {
+    return response.render("login", { error: "Invalid email or password." }); // Display same error message for both for security reasons (If user knows the email/username exists, they can use it to potentially hack the account)
+  }
+
+  // If login is successful, store the user in the session
+  request.session.user = {
+    id: user.id,
+    username: user.username,
+    email: user.email,
+    role: user.role,
+  };
+
+  // Redirect to landing page
+  response.redirect("/landing");
+});
 
 // GET /signup - Render signup form
 app.get("/signup", (request, response) => {
@@ -93,7 +113,8 @@ app.get("/", (request, response) => {
 });
 
 // GET /landing - Shows a welcome page for users, shows the names of all users if an admin
-app.get("/landing", (request, response) => {});
+app.get("/landing", (request, response) => {
+});
 
 // Start server
 app.listen(PORT, () => {
