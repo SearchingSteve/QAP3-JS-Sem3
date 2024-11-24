@@ -59,7 +59,9 @@ app.post("/signup", async (request, response) => {
   if (!username || !email || !password) {
     return response.render("signup", { error: "All fields are required." });
   }
-  const userExists = USERS.some((user) => user.email === email);
+  const userExists = USERS.some(
+    (user) => user.email === email || user.username === username
+  );
   if (userExists) {
     return response.render("signup", { error: "User already exists." });
   }
