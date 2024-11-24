@@ -1,5 +1,10 @@
 <%- include('partials/header', { title: "Login" }) %>
 <h1>Login</h1>
+
+<% if (error) { %>
+<p style="color: rgb(255, 0, 0)"><%= error %></p>
+<% } %>
+
 <form action="/login" method="POST">
   <div class="form-input-container">
     <label for="email">Email:</label>
@@ -9,7 +14,7 @@
     <label for="password">Password:</label>
     <input type="password" name="password" id="password" required />
   </div>
-  <button type="submit">Login</button>
+  <button type="submit">Login</butzton>
 </form>
 <button><a text href="/">Go back</a></button>
 <%- include('partials/footer') %>

@@ -41,18 +41,16 @@ const USERS = [
 
 // GET /login - Render login form
 app.get("/login", (request, response) => {
-  response.render("login");
+  response.render("login", { error: null });
 });
 
 // POST /login - Allows a user to login
 app.post("/login", (request, response) => {
-  const { username, email, password } = request.body;
-  const user = USERS.find(
-    (user) => user.email === email || user.username === username
-  );
-  const passwordMatch = bcrypt.compareSync(password, user.password);
-  if (!user || !passwordMatch) {
-    return response.render("login", { error: "Invalid email or password." }); // Display same error message for both for security reasons (If user knows the email/username exists, they can use it to potentially hack the account)
+  const { email, password } = request.body;
+  const user = USERS.find((user) => user.email === email);
+
+  if (!user || !bcrypt.compareSync(password, user.password)) {
+    return response.render("login", { error: "Invalid email or password." });
   }
 
   // If login is successful, store the user in the session
@@ -63,7 +61,7 @@ app.post("/login", (request, response) => {
     role: user.role,
   };
 
-  // Redirect to landing page
+  // Redirect to landing page after successful login
   response.redirect("/landing");
 });
 
@@ -131,18 +129,17 @@ app.get("/landing", (request, response) => {
 
 // GET /logout - Logs the user out by destroying the session
 app.get("/logout", (request, response) => {
-    // Destroy the session
-    request.session.destroy((err) => {
-      if (err) {
-        console.log("Error destroying session:", err);
-        return response.redirect("/landing");
-      }
-      
-      // Redirect to the login page after logging out
-      response.redirect("/login");
-    });
+  // Destroy the session
+  request.session.destroy((err) => {
+    if (err) {
+      console.log("Error destroying session:", err);
+      return response.redirect("/landing");
+    }
+
+    // Redirect to the login page after logging out
+    response.redirect("/login");
   });
-  
+});
 
 // Start server
 app.listen(PORT, () => {
