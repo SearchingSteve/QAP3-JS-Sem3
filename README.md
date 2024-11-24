@@ -1,98 +1,89 @@
-# User Management System  
+# User Management System
 
-This is the starting point for the **User Management System** assignment. The goal of this project is to create a web application where users can register, log in, and access role-based functionality based on their account type (user or admin).
+This is a web application where users can register, log in, and access different functionality based on their roles. The system supports two types of accounts: users and admins. Users can view their personal dashboard, while admins can view all registered users. This application uses **bcrypt** for password hashing and **express-session** for session management.
 
-## Features  
+## Features
 
 - **Home Page**:  
-  - Displays "Login" and "Sign Up" buttons.  
-  - Redirects users to their dashboard after successful login.  
+  - Contains "Login" and "Sign Up" buttons.  
+  - After successful login, users are redirected to their respective dashboards.
 
 - **Registration Page**:  
-  - Allows users to create an account with a username, email, and password.  
-  - Stores passwords securely using bcrypt hashing.  
+  - Users can create an account with a username, email, and password.  
+  - Passwords are securely hashed using bcrypt before storage.
 
 - **Login Page**:  
-  - Authenticates users using their email and password.  
-  - Checks hashed passwords for validity during authentication.  
+  - Users log in with their email and password.  
+  - Passwords are checked against hashed values to ensure authenticity.
 
 - **Landing Page**:  
-  - For **users**, displays a simple dashboard with their username.  
-  - For **admins**, displays all registered users, their emails, and roles.  
+  - **For users**: Displays a simple dashboard with their username.  
+  - **For admins**: Displays a list of all registered users, their emails, and roles.
 
 - **Logout**:  
-  - Logs the user out by destroying their session and redirecting to the home page.
+  - Users can log out, which destroys their session and redirects them to the home page.
 
-## Setup Instructions  
+## Setup Instructions
 
-### Prerequisites  
-- [Node.js](https://nodejs.org) installed on your machine.  
-- A code editor, such as [VSCode](https://code.visualstudio.com/).
+### Prerequisites
 
-## How to Use this Template  
+Before you start, ensure that you have the following installed on your local machine:
 
-This repository is set up as a **GitHub template** to help you quickly create your own version of the **User Management System**.  
+- [Node.js](https://nodejs.org)  
+- A code editor, such as [VSCode](https://code.visualstudio.com/)
 
-### Steps to Create Your Own Repository  
+### How to Set Up the Project
 
-1. **Click the "Use this template" button** at the top of this page on GitHub.  
+1. **Clone your repository** to your local machine:  
+    ```bash
+    git clone <your-new-repo-url>
+    ```
 
-1. **Name your new repository** and choose its visibility (public or private).  
-
-1. Once your repository is created, **clone your new repo** to your local machine:  
-    ```bash  
-    git clone <your-new-repo-url>  
-    ```  
-
-1. Navigate into the project directory and install the necessary dependencies:  
-    ```bash  
+2. **Navigate to the project directory and install dependencies**:  
+    ```bash
     cd <your-new-repo-name>  
-    npm install  
+    npm install
+    ```
+
+3. **Run the app**:  
+    ```bash
+    npm start
     ```  
+    This will start the server at `http://localhost:3000/`.
 
-1. **Run the app:**  
-    ```bash  
-    npm start  
-    ```  
-    This will start the server at `http://localhost:3000/`.  
+4. Begin developing and committing changes to the project:
+    ```bash
+    git add .
+    git commit -m "First commit"
+    git push origin main
+    ```
 
-1. You can now begin working on your project, adding your own code and committing your changes as you go:  
-    ```bash  
-    git add .  
-    git commit -m "First commit"  
-    git push origin main  
-    ```  
+## Development Guidelines
 
-By using this template, you'll have the project structure and initial setup ready to go, so you can focus on building the functionality!
+1. **Authentication**:
+   - Uses `express-session` for session management.
+   - Hashes all passwords with bcrypt before storing them.
+   - Authenticates users by comparing hashed passwords during login.
 
-## Development Guidelines  
+2. **Role-Based Access Control (RBAC)**:
+   - Allows only **admin** users to view all registered users.
+   - Ensures **regular users** can only access their own dashboard.
 
-1. **Authentication**:  
-   - Use `express-session` for session management.  
-   - Hash all passwords with bcrypt before storing them.  
-   - Authenticate users during login by comparing hashed passwords.  
+3. **Error Handling**:
+   - Displays appropriate error messages for invalid login or signup attempts.
 
-2. **Role-Based Access Control (RBAC)**:  
-   - Restrict the admin view of all registered users to accounts with the admin role.  
-   - Regular users should only access their dashboard.  
+4. **Security**:
+   - Does not store or transmit plaintext passwords. Always hashes passwords with bcrypt.
 
-3. **Error Handling**:  
-   - Display errors during login or signup if applicable.  
+5. **Data Storage**:
+   - Uses an in-memory array to store user accounts (persistent storage is not required).
 
-4. **Security**:  
-   - Ensure no plaintext passwords are stored or transmitted.  
 
-5. **Data Storage**:  
-   - Use an in-memory array to store user accounts. Persistent data storage is not required.
+## License
 
-## Submission Guidelines  
+This project is provided for **personal use only**. Redistribution, modification, or commercial use in any form is strictly prohibited without prior written permission from the author.
 
-- Submit a link to your GitHub repository through the Teams assignment.  
-- Ensure the application runs correctly with `npm start`.  
-- Include all required functionality as specified in the assignment description.
+For detailed license terms, refer to the [LICENSE](./LICENSE.md) file.
 
-## Notes  
-
-- Extra npm packages are allowed (except for templating engines like React).  
-- All pages should use **EJS templates** for rendering.  
-- Focus on building secure and functional features with proper user experience.  
+## Author
+**[Stephen Crocker](https://github.com/SearchingSteve)** 
