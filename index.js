@@ -114,6 +114,19 @@ app.get("/", (request, response) => {
 
 // GET /landing - Shows a welcome page for users, shows the names of all users if an admin
 app.get("/landing", (request, response) => {
+  if (!request.session.user) {
+    return response.redirect("/login");
+  }
+
+  const user = request.session.user;
+
+  if (user.role === "admin") {
+    // Display all users if the logged-in user is an admin
+    return response.render("landing", { user: user, users: USERS });
+  }
+
+  // Display user-specific information for regular users
+  response.render("landing", { user });
 });
 
 // Start server
