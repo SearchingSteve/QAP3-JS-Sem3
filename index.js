@@ -129,6 +129,21 @@ app.get("/landing", (request, response) => {
   response.render("landing", { user });
 });
 
+// GET /logout - Logs the user out by destroying the session
+app.get("/logout", (request, response) => {
+    // Destroy the session
+    request.session.destroy((err) => {
+      if (err) {
+        console.log("Error destroying session:", err);
+        return response.redirect("/landing");
+      }
+      
+      // Redirect to the login page after logging out
+      response.redirect("/login");
+    });
+  });
+  
+
 // Start server
 app.listen(PORT, () => {
   console.log(`Server running at http://localhost:${PORT}`);

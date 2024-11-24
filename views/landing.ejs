@@ -1,6 +1,8 @@
 <%- include('partials/header', { title: "Landing" }) %>
     <h1>Welcome, <%= user.username %>!</h1>
 
+    <!-- Dashboard -->
+     <!-- If the user is an admin, display all users else display the user's dashboard -->
     <% if (user.role === 'admin') { %>
         <h2>All Users</h2>
         <ul>
@@ -13,6 +15,7 @@
         <p>Welcome to your dashboard, <%= user.username %>!</p>
     <% } %>
 
+    <!-- Logout Form -->
     <form action="/logout" method="GET">
         <button type="submit">Logout</button>
     </form>
