@@ -1,6 +1,6 @@
 # User Management System
 
-This is a web application where users can register, log in, and access different functionality based on their roles. The system supports two types of accounts: users and admins. Users can view their personal dashboard, while admins can view all registered users. This application uses **bcrypt** for password hashing and **express-session** for session management.
+This is an express based web application where users can register, log in, and access different functionality based on their roles. The system supports two types of accounts: users and admins. Users can view their personal dashboard, while admins can view all registered users. This application uses **bcrypt** for password hashing and **express-session** for session management.
 
 ## Features
 
